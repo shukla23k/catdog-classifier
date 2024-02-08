@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {% block styles %} {{super()}}
+<link href="{{url_for('static', filename='css/cat_dog_classifier.css')}}" rel="stylesheet" /> {% endblock %} {% block content %}
+<div class="card text-center" id="main_card">
+    <br>
+    <br>
+    <div class="row text-center">
+        <h1><i class="fas fa-paw"></i> Let me predict if it's a Cat or Dog on your Image</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-5 text-left">
+            <div class="card text-center" id="pet">
+                <img src="/static/img/cat.jpg" class="img-responsive" />
+            </div>
+
+        </div>
+        <div class="col-md-2 text-left">
+        </div>
+        <div class="col-md-5 text-left">
+            <div class="card text-center" id="pet">
+                <img src="/static/img/dog.jpg" class="img-responsive" />
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row text-center">
+        <div class="col-md-3 text-left"></div>
+        <div class="col-md-6 text-left">
+            <div class="card text-center" id="form-upload">
+                <div class="row text-center">
+                    <h1><i class="fas fa-paw"></i> Upload your image in .jpg format:</h1>
+                </div>
+                {% if warning%}
+                <div class="row text-center">
+                    <div class="col-md-12 text-center">
+                        <h3 style="color:red"> {{ warning }} !</h3>
+                    </div>
+                </div>
+                {% endif %}
+                <form method=POST enctype=multipart/form-data action="{{ url_for('cat_dog_classifier.upload' ) }}">
+                    <div class="row text-center">
+                        <div class="col-md-4 text-left"></div>
+                        <div class="col-md-4 text-left">
+                            <input type=file name=photo required>
+                        </div>
+                        <div class="col-md-4 text-left"></div>
+                    </div>
+                    <br>
+                    <div class="row text-center">
+                        <div class="col-md-4 text-left"></div>
+                        <div class="col-md-5 text-center">
+                            <input type="submit" class="waves-effect waves-light btn-predict" value="Predict!">
+                        </div>
+                        <div class="col-md-3 text-left"></div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+        <div class="col-md-3 text-left"></div>
+    </div>
+
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large" href="{{url_for('dashboard')}}">
+        <i class="large material-icons">exit_to_app</i>
+    </a>
+</div>
+</div>
+
+
+{% endblock %}
